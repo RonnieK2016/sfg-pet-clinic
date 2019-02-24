@@ -1,2 +1,2 @@
 # sfg-pet-clinic
-Current version #0.0.3
+Current version #0.0.4
