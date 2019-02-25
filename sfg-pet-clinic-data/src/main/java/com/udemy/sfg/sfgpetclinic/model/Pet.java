@@ -2,7 +2,7 @@ package com.udemy.sfg.sfgpetclinic.model;
 
 import java.time.LocalDate;
 
-public class Pet {
+public class Pet extends BaseEntity {
 
     private PetType petType;
     private String name;
