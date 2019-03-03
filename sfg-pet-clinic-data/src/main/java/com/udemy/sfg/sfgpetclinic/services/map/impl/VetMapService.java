@@ -8,11 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class VetMapService extends AbstractMapService<Vet, Long>
         implements VetService {
-    @Override
-    public Vet save(Vet vet) {
-        super.save(vet.getId(), vet);
-        return vet;
-    }
 
     @Override
     public void delete(Vet vet) {

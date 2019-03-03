@@ -1,11 +1,14 @@
 package com.udemy.sfg.sfgpetclinic.services.map;
 
+import com.udemy.sfg.sfgpetclinic.model.BaseEntity;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class AbstractMapService<T, ID> {
-    private HashMap<ID, T> repository;
+public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
+    private HashMap<Long, T> repository;
 
     protected AbstractMapService() {
         this.repository = new HashMap<>();
@@ -19,8 +22,22 @@ public abstract class AbstractMapService<T, ID> {
         return repository.get(id);
     }
 
-    public void save(ID id, T object) {
-        repository.put(id, object);
+    public T save(T object) {
+        if(object.getId() == null) {
+            object.setId(getNextId());
+        }
+
+        repository.put(object.getId(), object);
+        return object;
+    }
+
+    private Long getNextId() {
+        if(repository.isEmpty()) {
+            return 1L;
+        }
+        else {
+            return Collections.max(repository.keySet()) + 1;
+        }
     }
 
     public void deleteById(ID id) {
