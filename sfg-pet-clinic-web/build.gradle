@@ -26,7 +26,8 @@ bootJar {
 sourceCompatibility = 1.8
 
 dependencies {
-    compile project(path: ':sfg-pet-clinic-data', configuration: 'compile')
+    //compile project(path: ':sfg-pet-clinic-data', configuration: 'compile')
+    compile project(':sfg-pet-clinic-data')
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
