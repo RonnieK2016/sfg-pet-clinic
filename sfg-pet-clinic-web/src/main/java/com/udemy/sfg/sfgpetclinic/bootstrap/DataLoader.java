@@ -1,11 +1,11 @@
 package com.udemy.sfg.sfgpetclinic.bootstrap;
 
 import com.udemy.sfg.sfgpetclinic.model.Owner;
+import com.udemy.sfg.sfgpetclinic.model.PetType;
 import com.udemy.sfg.sfgpetclinic.model.Vet;
 import com.udemy.sfg.sfgpetclinic.services.OwnerService;
+import com.udemy.sfg.sfgpetclinic.services.PetTypeService;
 import com.udemy.sfg.sfgpetclinic.services.VetService;
-import com.udemy.sfg.sfgpetclinic.services.map.impl.OwnerMapService;
-import com.udemy.sfg.sfgpetclinic.services.map.impl.VetMapService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,14 +13,26 @@ import org.springframework.stereotype.Component;
 public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        PetType dog = new PetType();
+        dog.setTypeName("Dog");
+        petTypeService.save(dog);
+
+        PetType cat = new PetType();
+        cat.setTypeName("Cat");
+        petTypeService.save(cat);
+
+        System.out.println("PetTypes saved");
+
         Owner owner1 = new Owner();
         owner1.setFirstName("John");
         owner1.setLastName("Jackson");
