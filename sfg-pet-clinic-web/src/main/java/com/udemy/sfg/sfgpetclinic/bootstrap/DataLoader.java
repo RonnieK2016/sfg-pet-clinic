@@ -1,9 +1,6 @@
 package com.udemy.sfg.sfgpetclinic.bootstrap;
 
-import com.udemy.sfg.sfgpetclinic.model.Owner;
-import com.udemy.sfg.sfgpetclinic.model.Pet;
-import com.udemy.sfg.sfgpetclinic.model.PetType;
-import com.udemy.sfg.sfgpetclinic.model.Vet;
+import com.udemy.sfg.sfgpetclinic.model.*;
 import com.udemy.sfg.sfgpetclinic.services.OwnerService;
 import com.udemy.sfg.sfgpetclinic.services.PetTypeService;
 import com.udemy.sfg.sfgpetclinic.services.VetService;
@@ -25,14 +22,18 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
+        if(petTypeService.findAll().isEmpty()) {
+            loadData();
+        }
+    }
+
+    private void loadData() {
         PetType dog = new PetType();
         dog.setTypeName("Dog");
-        petTypeService.save(dog);
 
         PetType cat = new PetType();
         cat.setTypeName("Cat");
-        petTypeService.save(cat);
 
         System.out.println("PetTypes saved");
 
@@ -67,15 +68,23 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Owners saved");
 
+        Speciality speciality1 = new Speciality();
+        speciality1.setDescription("Surgery");
+
+        Speciality speciality2 = new Speciality();
+        speciality2.setDescription("Common");
+
         Vet vet1 = new Vet();
         vet1.setFirstName("Jimmy");
         vet1.setLastName("Jones");
+        vet1.getSpecialities().add(speciality1);
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setId(2L);
         vet2.setFirstName("James");
         vet2.setLastName("Timmons");
+        vet2.getSpecialities().add(speciality2);
         vetService.save(vet2);
 
         System.out.println("Vets saved");

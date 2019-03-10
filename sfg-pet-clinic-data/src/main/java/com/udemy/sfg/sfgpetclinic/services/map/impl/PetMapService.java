@@ -33,7 +33,6 @@ public class PetMapService extends AbstractMapService<Pet, Long>
     @Override
     public void delete(Pet pet) {
         if(pet != null) {
-            petTypeService.delete(pet.getPetType());
             super.deleteById(pet.getId());
         }
     }
