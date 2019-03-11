@@ -4,8 +4,10 @@ import com.udemy.sfg.sfgpetclinic.model.Owner;
 import com.udemy.sfg.sfgpetclinic.services.OwnerService;
 import com.udemy.sfg.sfgpetclinic.services.PetService;
 import com.udemy.sfg.sfgpetclinic.services.map.AbstractMapService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 @Service
+@Profile({"default", "map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long>
         implements OwnerService{
 

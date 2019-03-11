@@ -1,10 +1,7 @@
 package com.udemy.sfg.sfgpetclinic.bootstrap;
 
 import com.udemy.sfg.sfgpetclinic.model.*;
-import com.udemy.sfg.sfgpetclinic.services.OwnerService;
-import com.udemy.sfg.sfgpetclinic.services.PetTypeService;
-import com.udemy.sfg.sfgpetclinic.services.VetService;
-import com.udemy.sfg.sfgpetclinic.services.VisitService;
+import com.udemy.sfg.sfgpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +13,15 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final VisitService visitService;
+    private final SpecialityService specialityService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, VisitService visitService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+                      VisitService visitService, SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.visitService = visitService;
+        this.specialityService = specialityService;
     }
 
     @Override
@@ -37,6 +37,9 @@ public class DataLoader implements CommandLineRunner {
 
         PetType cat = new PetType();
         cat.setTypeName("Cat");
+
+        petTypeService.save(dog);
+        petTypeService.save(cat);
 
         System.out.println("PetTypes saved");
 
@@ -83,6 +86,10 @@ public class DataLoader implements CommandLineRunner {
 
         Speciality speciality2 = new Speciality();
         speciality2.setDescription("Common");
+
+        specialityService.save(speciality1);
+        specialityService.save(speciality2);
+        System.out.println("Specialities Saved");
 
         Vet vet1 = new Vet();
         vet1.setFirstName("Jimmy");

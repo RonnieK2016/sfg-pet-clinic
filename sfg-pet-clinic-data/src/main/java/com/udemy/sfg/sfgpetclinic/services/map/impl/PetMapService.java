@@ -4,9 +4,11 @@ import com.udemy.sfg.sfgpetclinic.model.Pet;
 import com.udemy.sfg.sfgpetclinic.services.PetService;
 import com.udemy.sfg.sfgpetclinic.services.PetTypeService;
 import com.udemy.sfg.sfgpetclinic.services.map.AbstractMapService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile({"default", "map"})
 public class PetMapService extends AbstractMapService<Pet, Long>
         implements PetService {
 
