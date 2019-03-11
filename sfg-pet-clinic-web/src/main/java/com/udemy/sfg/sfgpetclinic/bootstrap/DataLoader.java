@@ -4,6 +4,7 @@ import com.udemy.sfg.sfgpetclinic.model.*;
 import com.udemy.sfg.sfgpetclinic.services.OwnerService;
 import com.udemy.sfg.sfgpetclinic.services.PetTypeService;
 import com.udemy.sfg.sfgpetclinic.services.VetService;
+import com.udemy.sfg.sfgpetclinic.services.VisitService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +15,13 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -48,6 +51,7 @@ public class DataLoader implements CommandLineRunner {
         pet1.setName("Max");
         pet1.setPetType(dog);
         pet1.setBirthDate(LocalDate.now());
+        pet1.setOwner(owner1);
         owner1.getPets().add(pet1);
 
         ownerService.save(owner1);
@@ -62,11 +66,17 @@ public class DataLoader implements CommandLineRunner {
         pet2.setName("Minnie");
         pet2.setPetType(cat);
         pet2.setBirthDate(LocalDate.now());
+        pet2.setOwner(owner2);
         owner2.getPets().add(pet2);
-
         ownerService.save(owner2);
 
         System.out.println("Owners saved");
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(pet2);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Cat");
+        visitService.save(catVisit);
 
         Speciality speciality1 = new Speciality();
         speciality1.setDescription("Surgery");
