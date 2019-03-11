@@ -1,7 +1,16 @@
 package com.udemy.sfg.sfgpetclinic.model;
 
-public class BaseEntity {
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
+@MappedSuperclass
+public class BaseEntity implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
@@ -10,5 +19,9 @@ public class BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isNew() {
+        return this.id == null;
     }
 }
