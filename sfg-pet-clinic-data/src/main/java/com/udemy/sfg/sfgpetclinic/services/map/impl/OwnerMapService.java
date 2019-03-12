@@ -19,13 +19,16 @@ public class OwnerMapService extends AbstractMapService<Owner, Long>
 
     @Override
     public Owner findByLastName(String lastName) {
-        return null;
+        return findAll().stream().filter(
+                owner -> lastName.equals(owner.getLastName()))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public Owner save(Owner owner) {
         if(owner != null) {
-            if(!owner.getPets().isEmpty()) {
+            if(owner.getPets() != null && !owner.getPets().isEmpty()) {
                 owner.getPets().forEach(petService::save);
             }
             return super.save(owner);
@@ -36,7 +39,7 @@ public class OwnerMapService extends AbstractMapService<Owner, Long>
     @Override
     public void delete(Owner owner) {
         if(owner != null) {
-            if(!owner.getPets().isEmpty()) {
+            if(owner.getPets() != null && !owner.getPets().isEmpty()) {
                 owner.getPets().forEach(petService::delete);
             }
 

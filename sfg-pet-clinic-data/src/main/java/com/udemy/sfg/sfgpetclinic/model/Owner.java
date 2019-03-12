@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Table(name = "owners")
 public class Owner extends Person {
 
@@ -21,7 +20,17 @@ public class Owner extends Person {
     private String city;
     @Column(name = "phone_number")
     private String phoneNumber;
-
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<Pet> pets = new HashSet<>();
+
+    @Builder
+    public Owner(Long id, String firstName, String lastName,
+                 String address, String city, String phoneNumber,
+                 Set<Pet> pets) {
+        super(id, firstName, lastName);
+        this.address = address;
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.pets = pets;
+    }
 }
