@@ -1,4 +1,4 @@
-package com.udemy.sfg.sfgpetclinic.contollers;
+package com.udemy.sfg.sfgpetclinic.controllers;
 
 import com.udemy.sfg.sfgpetclinic.services.OwnerService;
 import org.springframework.stereotype.Controller;

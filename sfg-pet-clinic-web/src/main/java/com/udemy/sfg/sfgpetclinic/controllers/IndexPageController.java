@@ -1,4 +1,4 @@
-package com.udemy.sfg.sfgpetclinic.contollers;
+package com.udemy.sfg.sfgpetclinic.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
