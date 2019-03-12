@@ -13,8 +13,9 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
     @Override
     public Visit save(Visit visit) {
         if(visit != null) {
-            if(visit.getPet() == null || visit.getPet().isNew()
-                    || visit.getPet().getOwner() == null || visit.getPet().getOwner().isNew()){
+            if(visit.getPet() == null || visit.getPet().getId() == null
+                    || visit.getPet().getOwner() == null
+                    || visit.getPet().getOwner().getId() == null){
                 throw new RuntimeException("Cannot store visit: owner and pet objects should be stored first");
             }
 
