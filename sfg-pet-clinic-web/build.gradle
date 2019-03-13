@@ -17,8 +17,15 @@ version '0.0.1-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
-apply plugin: "net.researchgate.release"
 apply plugin: 'wro4j'
+
+task releaseTask {
+    doLast {
+        apply plugin: "net.researchgate.release"
+    }
+}
+
+releaseTask.onlyIf { project.hasProperty('releaseTask') }
 
 repositories {
     mavenCentral()
