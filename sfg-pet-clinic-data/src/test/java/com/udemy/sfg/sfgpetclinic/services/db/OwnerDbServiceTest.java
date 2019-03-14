@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -47,10 +48,18 @@ class OwnerDbServiceTest {
 
     @Test
     void findByLastName() {
-        when(ownersRespository.findByLastName(any())).thenReturn(controlOwner);
+        when(ownersRespository.findByLastName(anyString())).thenReturn(controlOwner);
         Owner owner = ownerDbService.findByLastName(lastName);
         assertNotNull(owner);
-        verify(ownersRespository).findByLastName(any());
+        verify(ownersRespository).findByLastName(anyString());
+    }
+
+    @Test
+    void findAllByLastName() {
+        when(ownersRespository.findAllByLastName(anyString()))
+                .thenReturn(Arrays.asList(Owner.builder().build(), Owner.builder().build()));
+        assertEquals(2, ownerDbService.findAllByLastName(lastName).size());
+        verify(ownersRespository).findAllByLastName(anyString());
     }
 
     @Test

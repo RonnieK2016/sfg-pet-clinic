@@ -6,6 +6,10 @@ import com.udemy.sfg.sfgpetclinic.services.PetService;
 import com.udemy.sfg.sfgpetclinic.services.map.AbstractMapService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Profile({"default", "map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long>
@@ -23,6 +27,12 @@ public class OwnerMapService extends AbstractMapService<Owner, Long>
                 owner -> lastName.equals(owner.getLastName()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public List<Owner> findAllByLastName(String lastName) {
+        return findAll().stream().filter( owner -> lastName.equals(owner.getLastName()))
+                .collect(Collectors.toList());
     }
 
     @Override

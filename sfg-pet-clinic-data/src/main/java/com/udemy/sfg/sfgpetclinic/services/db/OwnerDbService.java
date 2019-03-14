@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -34,6 +35,11 @@ public class OwnerDbService implements OwnerService {
     @Override
     public Owner findById(Long id) {
         return ownersRespository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Owner> findAllByLastName(String lastName) {
+        return ownersRespository.findAllByLastName(lastName);
     }
 
     @Override
