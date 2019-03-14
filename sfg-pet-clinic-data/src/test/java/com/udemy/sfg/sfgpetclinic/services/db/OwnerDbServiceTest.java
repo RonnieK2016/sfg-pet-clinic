@@ -5,7 +5,6 @@ import com.udemy.sfg.sfgpetclinic.repositories.OwnersRespository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -56,10 +55,10 @@ class OwnerDbServiceTest {
 
     @Test
     void findAllByLastName() {
-        when(ownersRespository.findAllByLastName(anyString()))
+        when(ownersRespository.findAllByLastNameContaining(anyString()))
                 .thenReturn(Arrays.asList(Owner.builder().build(), Owner.builder().build()));
-        assertEquals(2, ownerDbService.findAllByLastName(lastName).size());
-        verify(ownersRespository).findAllByLastName(anyString());
+        assertEquals(2, ownerDbService.findAllByLastNameLike(lastName).size());
+        verify(ownersRespository).findAllByLastNameContaining(anyString());
     }
 
     @Test

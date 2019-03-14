@@ -38,8 +38,8 @@ public class OwnerDbService implements OwnerService {
     }
 
     @Override
-    public List<Owner> findAllByLastName(String lastName) {
-        return ownersRespository.findAllByLastName(lastName);
+    public List<Owner> findAllByLastNameLike(String lastName) {
+        return ownersRespository.findAllByLastNameContaining(lastName);
     }
 
     @Override

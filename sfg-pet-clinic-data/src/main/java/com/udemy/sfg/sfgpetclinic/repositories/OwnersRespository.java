@@ -9,6 +9,6 @@ public interface OwnersRespository extends CrudRepository<Owner, Long> {
 
     Owner findByLastName(String lastName);
 
-    List<Owner> findAllByLastName(String lastName);
+    List<Owner> findAllByLastNameContaining(String lastName);
 
 }
