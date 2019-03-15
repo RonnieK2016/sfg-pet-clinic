@@ -2,6 +2,7 @@ package com.udemy.sfg.sfgpetclinic.model;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -38,7 +39,9 @@ public class Pet extends BaseEntity {
         this.petType = petType;
         this.owner = owner;
         this.birthDate = birthDate;
-        this.visits = visits;
+        if(!CollectionUtils.isEmpty(visits)) {
+            this.visits = visits;
+        }
     }
 
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)

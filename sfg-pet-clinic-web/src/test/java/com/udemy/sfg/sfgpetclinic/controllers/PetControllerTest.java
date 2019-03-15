@@ -124,10 +124,4 @@ class PetControllerTest {
         assertEquals(controlOwner.getId(), petController.findOwner(1L).getId());
         verify(ownerService).findById(anyLong());
     }
-
-    @Test
-    void initOwnerBinder() {
-        //todo impl
-    }
-
 }
